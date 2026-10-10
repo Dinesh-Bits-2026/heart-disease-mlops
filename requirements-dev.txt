@@ -1,5 +1,6 @@
 # Tools for development and CI only (not needed inside the Docker image)
 pytest
+httpx
 flake8
 jupyter
 ipykernel

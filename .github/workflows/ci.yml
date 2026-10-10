@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint-test-train:
+  lint-test-train-build:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,7 +26,7 @@ jobs:
           pip install -r requirements.txt -r requirements-dev.txt
 
       - name: Lint with flake8
-        run: flake8 src tests
+        run: flake8 src api tests
 
       - name: Run unit tests
         run: |
@@ -35,6 +35,22 @@ jobs:
 
       - name: Train model
         run: python -m src.train
+
+      - name: Build Docker image
+        run: docker build -t heart-disease-api:ci .
+
+      - name: Smoke-test the container
+        run: |
+          docker run -d --name heart-api -p 8000:8000 heart-disease-api:ci
+          for i in $(seq 1 20); do
+            curl -sf http://localhost:8000/health && break || sleep 2
+          done
+          curl -sf -X POST http://localhost:8000/predict \
+            -H "Content-Type: application/json" \
+            -d @api/sample_request.json
+          echo
+          docker logs heart-api
+          docker rm -f heart-api
 
       - name: Upload test report
         if: always()

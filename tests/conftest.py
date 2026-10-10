@@ -2,8 +2,10 @@
 import numpy as np
 import pandas as pd
 import pytest
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
 
-from src.features import FEATURES, TARGET
+from src.features import FEATURES, TARGET, build_preprocessor
 
 
 @pytest.fixture(scope="session")
@@ -35,3 +37,13 @@ def sample_df() -> pd.DataFrame:
 def xy(sample_df):
     """Fresh copies of features and target for each test (safe to modify)."""
     return sample_df[FEATURES].copy(), sample_df[TARGET].copy()
+
+
+@pytest.fixture(scope="session")
+def fitted_model(sample_df):
+    """A small trained pipeline, shared by model and API tests."""
+    pipe = Pipeline([
+        ("prep", build_preprocessor()),
+        ("model", LogisticRegression(max_iter=1000, random_state=0)),
+    ])
+    return pipe.fit(sample_df[FEATURES], sample_df[TARGET])

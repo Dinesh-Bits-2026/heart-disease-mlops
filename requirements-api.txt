@@ -1,0 +1,10 @@
+# Runtime dependencies for the Docker image ONLY.
+# !! Replace these with the PINNED versions from your venv (see the chat instructions).
+# scikit-learn / pandas / numpy / joblib must match the versions used to train the model.
+fastapi==0.142.2
+joblib==1.6.0
+numpy==2.4.6
+pandas==3.0.6
+prometheus_client==0.26.0
+scikit-learn==1.9.1
+uvicorn==0.54.0
