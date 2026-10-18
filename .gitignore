@@ -9,3 +9,11 @@ mlartifacts/
 .env
 *.log
 .DS_Store
+scripts/build_report.py
+scripts/build_report.py.bak
+scripts/build_report_docx.py
+scripts/compact_report.py
+scripts/report_numbers.py
+scripts/make_thumbnail.py
+scripts/__pycache__/
+
