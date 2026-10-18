@@ -17,3 +17,8 @@ scripts/report_numbers.py
 scripts/make_thumbnail.py
 scripts/__pycache__/
 
+
+report.pdf
+progress.md
+
+PROGRESS.md
