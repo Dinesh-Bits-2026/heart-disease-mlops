@@ -4,3 +4,5 @@ httpx
 flake8
 jupyter
 ipykernel
+reportlab
+pypdf

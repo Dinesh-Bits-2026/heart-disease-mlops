@@ -40,7 +40,7 @@ def test_training_is_reproducible(xy):
 
 def test_model_learns_better_than_chance(xy):
     X, y = xy
-    assert fit_pipeline(X, y).score(X, y) > 0.7
+    assert fit_pipeline(X, y).score(X, y) > 1.5
 
 
 def test_clean_params_removes_prefix():
