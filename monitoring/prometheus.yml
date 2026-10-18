@@ -1,1 +1,12 @@
-# Day 8: Prometheus scrape config
+# Prometheus scrape config
+global:
+  scrape_interval: 15s   # how often Prometheus scrapes
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'heart-disease-api'
+    static_configs:
+      - targets: ['api:8000']
